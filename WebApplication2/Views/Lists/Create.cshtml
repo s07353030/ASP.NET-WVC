@@ -1,0 +1,90 @@
+﻿@model WebApplication2.List
+
+@{
+    ViewBag.Title = "creat";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>報修單</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @*@Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <label class="control-label col-md-2" for="title">需報修物品</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*<div class="form-group">
+            <label class="control-label col-md-2" for="furniture">需維修物品</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.furniture, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.furniture, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+        <div style="display:none">
+            <div class="form-group">
+                @*@Html.LabelFor(model => model.State, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                <label class="control-label col-md-2" for="State">狀態</label>
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.State)
+                        @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @*<div style="display:none">
+            <div class="form-group">
+                @Html.LabelFor(model => model.CreateTime, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CreateTime, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CreateTime, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div style="display:none">
+            <div style="display:none">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ModifyTime, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ModifyTime, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ModifyTime, null, new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>*@
+
+        @*<input type="date" id="CreateTime" name="CreateTime" value="" />
+            <input type="hidden" id="ModifyTime" name="ModifyTime" value="" />*@
+        <input type="hidden" id="CreateTime" name="CreateTime" value="@DateTime.Now" />
+            <input type="hidden" id="ModifyTime" name="ModifyTime" value="@DateTime.Now" />
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="創建" class="btn btn-outline-success" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("返回表單", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
